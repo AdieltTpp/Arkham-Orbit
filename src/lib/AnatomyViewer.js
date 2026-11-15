@@ -1,14 +1,18 @@
 /* Procedural 3D mesh, projected and shaded on a 2D canvas only on demand. */
-class AnatomyViewer {
+export class AnatomyViewer {
  constructor(canvas) {
   this.canvas=canvas; this.ctx=canvas.getContext('2d'); this.angle=0; this.system=null; this.critical=false; this.pending=false;
   this.parts=[]; this.createBody();
-  new ResizeObserver(()=>this.requestDraw()).observe(canvas);
+  this.events = new AbortController();
+  this.observer = new ResizeObserver(()=>this.requestDraw());
+  this.observer.observe(canvas);
   let previous=null;
-  canvas.addEventListener('pointerdown',event=>{previous=event.clientX;canvas.setPointerCapture(event.pointerId)});
-  canvas.addEventListener('pointermove',event=>{if(previous===null)return;this.angle+=(event.clientX-previous)*.012;previous=event.clientX;this.requestDraw()});
-  const stop=()=>{previous=null};canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);
-  canvas.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home'].includes(event.key))return;event.preventDefault();this.angle=event.key==='Home'?0:this.angle+(event.key==='ArrowLeft'?-.2:.2);this.requestDraw()});
+  const options = { signal: this.events.signal };
+  canvas.addEventListener('pointerdown',event=>{previous=event.clientX;canvas.setPointerCapture(event.pointerId)},options);
+  canvas.addEventListener('pointermove',event=>{if(previous===null)return;this.angle+=(event.clientX-previous)*.012;previous=event.clientX;this.requestDraw()},options);
+  const stop=()=>{previous=null};canvas.addEventListener('pointerup',stop,options);canvas.addEventListener('pointercancel',stop,options);
+  canvas.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home'].includes(event.key))return;event.preventDefault();this.angle=event.key==='Home'?0:this.angle+(event.key==='ArrowLeft'?-.2:.2);this.requestDraw()},options);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(this.frame);this.pending=false}else this.requestDraw()},options);
  }
  ellipsoid(x,y,z,rx,ry,rz,kind='body') {
   const lat=12,lon=16;
@@ -35,7 +39,8 @@ class AnatomyViewer {
   this.ellipsoid(0,-2.53,.22,.26,.21,.12,'mood');
  }
  select(system,critical=false){this.system=system;this.critical=critical;this.requestDraw()}
- requestDraw(){if(this.pending)return;this.pending=true;requestAnimationFrame(()=>{this.pending=false;this.draw()})}
+ requestDraw(){if(this.pending||document.hidden)return;this.pending=true;this.frame=requestAnimationFrame(()=>{this.pending=false;this.draw()})}
+ dispose(){this.events.abort();this.observer.disconnect();cancelAnimationFrame(this.frame);this.pending=false}
  draw(){
   const rect=this.canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,1.5);this.canvas.width=Math.round(rect.width*dpr);this.canvas.height=Math.round(rect.height*dpr);
   const ctx=this.ctx;ctx.scale(dpr,dpr);const scale=Math.min(rect.height/6.6,rect.width/3.8),cx=rect.width/2,cy=rect.height/2+22;
@@ -52,4 +57,3 @@ class AnatomyViewer {
   }
  }
 }
-window.AnatomyViewer=AnatomyViewer;

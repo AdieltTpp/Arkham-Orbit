@@ -1,11 +1,15 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#edf3f7"><title>Órbita · Salud de tripulación</title><link rel="stylesheet" href="styles.css"></head>
-<body><header><a class="brand" href="./">◉ <strong>ÓRBITA</strong><span>CREW HEALTH SYSTEM</span></a><div class="mission">MISIÓN ARES · DÍA 042</div><button id="connection" class="connection">● Enlace con Tierra</button></header>
-<main><div class="intro"><div><p class="eyebrow">CENTRO DE SALUD PERSONAL</p><h1>Tu salud, en órbita.</h1><p>Comandante Luis Mendoza <span>·</span> Perfil de demostración</p></div><label class="scenario">ESCENARIO SIMULADO<select id="scenario"><option value="normal">Seguimiento diario</option><option value="attention">Atención · Descanso</option><option value="critical">Alerta cardiovascular</option></select></label></div>
-<div id="alert" role="status" hidden></div><section id="metrics" class="metrics" aria-label="Indicadores de salud"></section>
-<section class="workspace"><aside class="systems"><p class="eyebrow">EXPLORAR SISTEMAS</p><div id="systems"></div><div class="source-note"><span class="small-dot"></span><strong>Datos simulados</strong><p>Las lecturas ilustran el diseño. Sin conexión a sensores clínicos.</p></div></aside>
-<section class="anatomy"><div class="viewer-heading"><div><p class="eyebrow">VISTA ANATÓMICA</p><h2 id="anatomy-title">Tu cuerpo, conectado.</h2></div><span class="viewer-tag">3D · LOCAL</span></div><canvas id="body" tabindex="0" aria-label="Modelo anatómico esquemático 3D. Arrastra para girar o usa las flechas del teclado."></canvas><div class="viewer-bottom"><span>↔ Arrastra para explorar</span><button id="reset">↺ Vista frontal</button></div><div class="axis">X ── Y</div></section>
-<aside id="detail" class="detail" aria-live="polite"><div class="empty-detail"><span>◎</span><h2>Explora una lectura</h2><p>Toca un indicador o un sistema para ver su contexto y las acciones de seguimiento.</p><div>Registro local disponible<br>Última muestra de demo · 14:32</div></div></aside></section>
-<section class="modules"><button class="module games" data-module="games"><div class="module-symbol">✣</div><div><p class="eyebrow">BIENESTAR COGNITIVO</p><h2>Una pausa para ti</h2><p>Juego breve y registro de ánimo</p></div><span>↗</span></button><button class="module family" data-module="family"><div class="module-symbol">♫</div><div><p class="eyebrow">CONEXIÓN EMOCIONAL</p><h2>Un poco de casa</h2><p>Mensajes, recuerdos y sonidos</p></div><span>↗</span></button><button class="module garden" data-module="garden"><div class="plant"><i></i><b></b><em></em></div><div><p class="eyebrow">AGRICULTURA ESPACIAL</p><h2>Algo bueno crece</h2><p>Microverdes · Bitácora de cuidado</p></div><span>↗</span></button></section>
-<footer><span>PROTOTIPO UX/UI · ÓRBITA</span><span>Renderizado bajo demanda · Sin animación continua</span></footer></main>
-<dialog id="dialog"><button id="close-dialog" class="close" aria-label="Cerrar">×</button><div id="dialog-content"></div></dialog><script src="data.js"></script><script src="anatomy.js"></script><script src="app.js"></script></body></html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#edf3f7" />
+    <meta name="description" content="Órbita. Prototipo interactivo de salud y bienestar de la tripulación." />
+    <title>Órbita · Salud de tripulación</title>
+    <script type="module" crossorigin src="/assets/index-B5ZXJmLL.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-D-PHOy0G.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

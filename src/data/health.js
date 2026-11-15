@@ -1,4 +1,4 @@
-window.healthData = {
+export const healthData = {
  metrics: [
  {id:'pressure',name:'Presión arterial',value:'118/76',unit:'mmHg',system:'cardio',source:'Tensiómetro · Simulado',note:'Consulta la lectura junto con su fecha y condiciones de medición.'},
  {id:'heart',name:'Frecuencia cardíaca',value:'72',unit:'lpm',system:'cardio',source:'Sensor de pulso · Simulado',note:'El historial permite explorar cambios respecto a mediciones anteriores.'},
